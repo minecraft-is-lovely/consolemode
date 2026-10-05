@@ -1,4 +1,5 @@
-TARGET := iphone:clang:latest:15.0
+# Pin the patched SDK; Preferences is absent from the stock Xcode SDK.
+TARGET := iphone:clang:16.5:15.0
 ARCHS = arm64 arm64e
 THEOS_PACKAGE_SCHEME = rootless
 
