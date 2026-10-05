@@ -1,0 +1,9 @@
+Package: com.cubik.consolemode
+Name: ConsoleMode
+Version: 1.0.0
+Architecture: iphoneos-arm64
+Description: Landscape game launcher overlay for SpringBoard with embedded WKWebView.
+Maintainer: ConsoleMode
+Author: ConsoleMode
+Section: Tweaks
+Depends: ellekit, preferenceloader, firmware (>= 15.0)

@@ -1,2 +1,17 @@
-# consolemode
-Rootless Theos ConsoleMode tweak source for iPhone XS Max / Dopamine
+# ConsoleMode
+
+Rootless Theos/Logos jailbreak tweak source for iPhone XS Max on iOS 17.3 with Dopamine. **Uncompiled and not device-tested.**
+
+Full source and build/install instructions: [consolemode/README.md](consolemode/README.md).
+
+## Approve the build workflow
+
+The connected GitHub OAuth account can upload source but does not grant permission to write files under `.github/workflows`. The repository owner must approve this one file using GitHub's website.
+
+[**Add build workflow**](https://github.com/minecraft-is-lovely/consolemode/new/main?filename=.github%2Fworkflows%2Fbuild-consolemode.yml&value=name%3A%20Build%20ConsoleMode%20package%0A%0A%23%20Deliberately%20manual%3A%20adding%20this%20file%20never%20starts%20a%20paid%20runner%20by%20itself.%0Aon%3A%0A%20%20workflow_dispatch%3A%0A%0Apermissions%3A%0A%20%20contents%3A%20read%0A%0Ajobs%3A%0A%20%20build%3A%0A%20%20%20%20runs-on%3A%20macos-latest%0A%20%20%20%20timeout-minutes%3A%2030%0A%20%20%20%20env%3A%0A%20%20%20%20%20%20THEOS%3A%20%24%7B%7B%20github.workspace%20%7D%7D%2F.theos-toolchain%0A%20%20%20%20steps%3A%0A%20%20%20%20%20%20-%20name%3A%20Check%20out%20source%0A%20%20%20%20%20%20%20%20uses%3A%20actions%2Fcheckout%40v4%0A%0A%20%20%20%20%20%20-%20name%3A%20Install%20signing%20and%20packaging%20tools%0A%20%20%20%20%20%20%20%20run%3A%20brew%20install%20ldid%20dpkg%0A%0A%20%20%20%20%20%20-%20name%3A%20Install%20Theos%20and%20patched%20SDK%0A%20%20%20%20%20%20%20%20shell%3A%20bash%0A%20%20%20%20%20%20%20%20run%3A%20%7C%0A%20%20%20%20%20%20%20%20%20%20set%20-euo%20pipefail%0A%20%20%20%20%20%20%20%20%20%20git%20clone%20--depth%201%20--recurse-submodules%20https%3A%2F%2Fgithub.com%2Ftheos%2Ftheos.git%20%22%24THEOS%22%0A%20%20%20%20%20%20%20%20%20%20git%20clone%20--depth%201%20https%3A%2F%2Fgithub.com%2Ftheos%2Fsdks.git%20%22%24RUNNER_TEMP%2Ftheos-sdks%22%0A%20%20%20%20%20%20%20%20%20%20mkdir%20-p%20%22%24THEOS%2Fsdks%22%0A%20%20%20%20%20%20%20%20%20%20cp%20-R%20%22%24RUNNER_TEMP%2Ftheos-sdks%2FiPhoneOS16.5.sdk%22%20%22%24THEOS%2Fsdks%2F%22%0A%20%20%20%20%20%20%20%20%20%20xcrun%20--sdk%20iphoneos%20--find%20clang%0A%0A%20%20%20%20%20%20-%20name%3A%20Build%20rootless%20package%0A%20%20%20%20%20%20%20%20working-directory%3A%20consolemode%0A%20%20%20%20%20%20%20%20shell%3A%20bash%0A%20%20%20%20%20%20%20%20run%3A%20%7C%0A%20%20%20%20%20%20%20%20%20%20set%20-euo%20pipefail%0A%20%20%20%20%20%20%20%20%20%20make%20clean%0A%20%20%20%20%20%20%20%20%20%20make%20package%20FINALPACKAGE%3D1%20SDKVERSION%3D16.5%0A%0A%20%20%20%20%20%20-%20name%3A%20Save%20Debian%20package%0A%20%20%20%20%20%20%20%20uses%3A%20actions%2Fupload-artifact%40v4%0A%20%20%20%20%20%20%20%20with%3A%0A%20%20%20%20%20%20%20%20%20%20name%3A%20ConsoleMode-rootless-deb%0A%20%20%20%20%20%20%20%20%20%20path%3A%20consolemode%2Fpackages%2F*.deb%0A%20%20%20%20%20%20%20%20%20%20if-no-files-found%3A%20error%0A)
+
+Open that link in Safari while signed into this GitHub account. Check that the filename is `.github/workflows/build-consolemode.yml`, then choose **Commit changes** and commit directly to the main branch. The prepared YAML is also saved as [build-consolemode.yml](build-consolemode.yml) in this repository in case you need to copy it.
+
+The workflow is manual-only: committing it does not start a build. Once it is committed, ask the agent to run it. It uses a macOS GitHub Actions runner and your GitHub Actions allowance; it does not install anything on the phone.
+
+A successful build produces a downloadable `.deb` but does not prove that private SpringBoard APIs work on the target device. ConsoleMode starts disabled for safety.

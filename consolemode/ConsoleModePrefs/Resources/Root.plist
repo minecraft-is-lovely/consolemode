@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+<key>title</key><string>ConsoleMode</string>
+<key>items</key>
+<array>
+    <dict>
+        <key>cell</key><string>PSGroupCell</string>
+        <key>label</key><string>ConsoleMode</string>
+        <key>footerText</key><string>Enable, then lock and unlock to open the console. Disable here to return to normal phone behavior. ConsoleMode starts disabled after installation.</string>
+    </dict>
+    <dict>
+        <key>cell</key><string>PSSwitchCell</string>
+        <key>label</key><string>Enable ConsoleMode</string>
+        <key>key</key><string>enabled</string>
+        <key>default</key><false/>
+        <key>defaults</key><string>com.cubik.consolemode</string>
+        <key>get</key><string>readPreferenceValue:</string>
+        <key>set</key><string>setPreferenceValue:specifier:</string>
+    </dict>
+    <dict>
+        <key>cell</key><string>PSLinkListCell</string>
+        <key>detail</key><string>PSListItemsController</string>
+        <key>label</key><string>Landscape direction</string>
+        <key>key</key><string>orientation</string>
+        <key>default</key><string>landscapeLeft</string>
+        <key>defaults</key><string>com.cubik.consolemode</string>
+        <key>validTitles</key><array><string>Landscape left</string><string>Landscape right</string></array>
+        <key>validValues</key><array><string>landscapeLeft</string><string>landscapeRight</string></array>
+        <key>get</key><string>readPreferenceValue:</string>
+        <key>set</key><string>setPreferenceValue:specifier:</string>
+    </dict>
+    <dict>
+        <key>cell</key><string>PSGroupCell</string>
+        <key>label</key><string>Automatic game</string>
+        <key>footerText</key><string>Leave the URL blank to show the launcher. You can also choose a game from the console's Settings screen.</string>
+    </dict>
+    <dict>
+        <key>cell</key><string>PSEditTextCell</string>
+        <key>label</key><string>Auto-open URL</string>
+        <key>key</key><string>autoLaunchURL</string>
+        <key>default</key><string></string>
+        <key>defaults</key><string>com.cubik.consolemode</string>
+        <key>keyboardType</key><string>URL</string>
+        <key>autoCaps</key><string>None</string>
+        <key>autoCorrection</key><string>No</string>
+        <key>get</key><string>readPreferenceValue:</string>
+        <key>set</key><string>setPreferenceValue:specifier:</string>
+    </dict>
+    <dict><key>cell</key><string>PSGroupCell</string><key>label</key><string>Game destinations</string></dict>
+    <dict>
+        <key>cell</key><string>PSEditTextCell</string><key>label</key><string>Cubik Game</string>
+        <key>key</key><string>gameURL0</string><key>default</key><string>https://cubik-game.replit.app</string>
+        <key>defaults</key><string>com.cubik.consolemode</string>
+        <key>keyboardType</key><string>URL</string><key>autoCaps</key><string>None</string><key>autoCorrection</key><string>No</string>
+        <key>get</key><string>readPreferenceValue:</string><key>set</key><string>setPreferenceValue:specifier:</string>
+    </dict>
+    <dict>
+        <key>cell</key><string>PSEditTextCell</string><key>label</key><string>Bloo</string>
+        <key>key</key><string>gameURL1</string><key>default</key><string>https://bloo.watch</string>
+        <key>defaults</key><string>com.cubik.consolemode</string>
+        <key>keyboardType</key><string>URL</string><key>autoCaps</key><string>None</string><key>autoCorrection</key><string>No</string>
+        <key>get</key><string>readPreferenceValue:</string><key>set</key><string>setPreferenceValue:specifier:</string>
+    </dict>
+    <dict>
+        <key>cell</key><string>PSEditTextCell</string><key>label</key><string>Kintic</string>
+        <key>key</key><string>gameURL2</string><key>default</key><string>https://kintic.site</string>
+        <key>defaults</key><string>com.cubik.consolemode</string>
+        <key>keyboardType</key><string>URL</string><key>autoCaps</key><string>None</string><key>autoCorrection</key><string>No</string>
+        <key>get</key><string>readPreferenceValue:</string><key>set</key><string>setPreferenceValue:specifier:</string>
+    </dict>
+    <dict>
+        <key>cell</key><string>PSEditTextCell</string><key>label</key><string>XP-OS</string>
+        <key>key</key><string>gameURL3</string><key>default</key><string>https://xp-os.replit.app</string>
+        <key>defaults</key><string>com.cubik.consolemode</string>
+        <key>keyboardType</key><string>URL</string><key>autoCaps</key><string>None</string><key>autoCorrection</key><string>No</string>
+        <key>get</key><string>readPreferenceValue:</string><key>set</key><string>setPreferenceValue:specifier:</string>
+    </dict>
+</array>
+</dict>
+</plist>

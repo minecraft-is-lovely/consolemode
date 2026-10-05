@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>enabled</key><false/>
+    <key>orientation</key><string>landscapeLeft</string>
+    <key>autoLaunchURL</key><string></string>
+    <key>gameURL0</key><string>https://cubik-game.replit.app</string>
+    <key>gameURL1</key><string>https://bloo.watch</string>
+    <key>gameURL2</key><string>https://kintic.site</string>
+    <key>gameURL3</key><string>https://xp-os.replit.app</string>
+</dict>
+</plist>
