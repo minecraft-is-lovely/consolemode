@@ -1,6 +1,6 @@
 Package: com.cubik.consolemode
 Name: ConsoleMode
-Version: 1.0.0
+Version: 1.0.1
 Architecture: iphoneos-arm64
 Description: Landscape game launcher overlay for SpringBoard with embedded WKWebView.
 Maintainer: ConsoleMode

@@ -7,6 +7,7 @@
         <key>bundle</key><string>ConsoleModePrefs</string>
         <key>cell</key><string>PSLinkCell</string>
         <key>detail</key><string>ConsoleModePrefsController</string>
+        <key>isController</key><true/>
         <key>label</key><string>ConsoleMode</string>
     </dict>
 </dict>
