@@ -1,6 +1,6 @@
 # ConsoleMode
 
-A **source-only, uncompiled Theos/Logos jailbreak tweak** targeting a rootless,
+A **Theos/Logos jailbreak tweak project** targeting a rootless,
 arm64/arm64e iPhone environment, including iOS 17.3 where an appropriate
 jailbreak and tweak-injection system are available. This project does not
 jailbreak a device, is not an App Store application, and is not device-tested.
@@ -51,8 +51,8 @@ checked on the target device.
   relocated-bootstrap support from current Theos. A rootful jailbreak requires
   a separate packaging configuration, not simply installing this rootless package.
 - PreferenceLoader and the private Preferences framework must be compatible
-  with the device. The preference controller includes minimal private class
-  declarations so it does not require third-party preference helper libraries.
+   with the device. The preference controller uses the standard private
+   Preferences headers from Theos; no preference helper library is required.
 
 ## Features implemented
 
@@ -110,8 +110,9 @@ The build host needs:
 4. Theos substrate headers/library and Debian packaging tools.
 
 The Replit environment used to author this project has **no configured Theos
-installation or iOS SDK**, so neither Objective-C compilation nor a `.deb`
-build has been performed here.
+installation or iOS SDK**. Rootless packages have been compiled successfully
+using the macOS GitHub Actions workflow. A successful build does not establish
+that all private APIs or console behaviors work on the target device.
 
 ```sh
 export THEOS=/path/to/theos
@@ -123,8 +124,7 @@ make package FINALPACKAGE=1
 ### Manual GitHub Actions build
 
 The repository includes `.github/workflows/build-consolemode.yml`. It is
-**manual-only** (`workflow_dispatch`), does not deploy or install anything,
-and has not been run here.
+**manual-only** (`workflow_dispatch`) and does not deploy or install anything.
 
 If this repository is placed on GitHub:
 
@@ -134,12 +134,12 @@ If this repository is placed on GitHub:
 3. If compilation succeeds, download the `ConsoleMode-rootless-deb` artifact.
 4. If it fails, review the compiler output before attempting installation.
 
-Running the workflow uses your GitHub Actions allowance. No connection,
-remote repository creation, or workflow run is performed by this project.
+Running the workflow uses your GitHub Actions allowance. Builds must be
+started explicitly; committing code alone does not start this workflow.
 
 The resulting package is written to `packages/`. The project defaults to
-`THEOS_PACKAGE_SCHEME=rootless` and `ARCHS="arm64 arm64e"`. A `.deb` build cannot
-be verified until it is run with the prerequisites above.
+`THEOS_PACKAGE_SCHEME=rootless` and `ARCHS="arm64 arm64e"`. Verify each `.deb`
+build by running it with the prerequisites above.
 
 ## Install and use
 

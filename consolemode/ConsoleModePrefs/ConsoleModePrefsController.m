@@ -1,27 +1,21 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-
-// Minimal declarations for the PRIVATE Preferences framework. These are not
-// public SDK classes. PreferenceLoader supplies this integration at runtime.
-@interface PSSpecifier : NSObject
-- (id)propertyForKey:(NSString *)key;
-@end
-
-@interface PSListController : UIViewController
-- (NSArray *)loadSpecifiersFromPlistName:(NSString *)name target:(id)target;
-@end
+#import <Preferences/PSListController.h>
+#import <Preferences/PSSpecifier.h>
 
 @interface ConsoleModePrefsController : PSListController
-@property(nonatomic, strong) NSArray *cachedSpecifiers;
 @end
 
 @implementation ConsoleModePrefsController
 
-- (NSArray *)specifiers {
-    if (!self.cachedSpecifiers) {
-        self.cachedSpecifiers = [self loadSpecifiersFromPlistName:@"Root" target:self];
+- (NSMutableArray *)specifiers {
+    // PSListController's table reads its own inherited cache, not a separate
+    // subclass property. Resolve resources from this preference bundle explicitly.
+    if (!_specifiers) {
+        NSBundle *bundle = [NSBundle bundleForClass:[ConsoleModePrefsController class]];
+        _specifiers = [self loadSpecifiersFromPlistName:@"Root" target:self bundle:bundle];
     }
-    return self.cachedSpecifiers;
+    return _specifiers;
 }
 
 - (id)readPreferenceValue:(PSSpecifier *)specifier {
