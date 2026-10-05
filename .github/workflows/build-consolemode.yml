@@ -1,0 +1,46 @@
+name: Build ConsoleMode package
+
+# Deliberately manual: adding this file never starts a paid runner by itself.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-latest
+    timeout-minutes: 30
+    env:
+      THEOS: ${{ github.workspace }}/.theos-toolchain
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Install signing and packaging tools
+        run: brew install ldid dpkg
+
+      - name: Install Theos and patched SDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --depth 1 --recurse-submodules https://github.com/theos/theos.git "$THEOS"
+          git clone --depth 1 https://github.com/theos/sdks.git "$RUNNER_TEMP/theos-sdks"
+          mkdir -p "$THEOS/sdks"
+          cp -R "$RUNNER_TEMP/theos-sdks/iPhoneOS16.5.sdk" "$THEOS/sdks/"
+          xcrun --sdk iphoneos --find clang
+
+      - name: Build rootless package
+        working-directory: consolemode
+        shell: bash
+        run: |
+          set -euo pipefail
+          make clean
+          make package FINALPACKAGE=1 SDKVERSION=16.5
+
+      - name: Save Debian package
+        uses: actions/upload-artifact@v4
+        with:
+          name: ConsoleMode-rootless-deb
+          path: consolemode/packages/*.deb
+          if-no-files-found: error
